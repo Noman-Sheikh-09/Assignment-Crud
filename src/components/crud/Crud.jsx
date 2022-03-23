@@ -11,7 +11,7 @@ export default function Crud() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
-  
+const [updateInd, setUpdateInd] = useState(0)
   const delHandler = (index) => {
     let newEmployee = employee.filter((employee, i) => {
       if (i !== index) {
@@ -24,6 +24,8 @@ export default function Crud() {
   const updateHandler = (employee, index) => {
     console.log(employee);
 
+
+    setUpdateInd(index);
     setFirstName(employee.fname);
     setLastName(employee.lname);
     setEmail(employee.email);
@@ -57,14 +59,23 @@ export default function Crud() {
         lname,
         email,
       };
+
+
+      let updateEmployee  = employee.map((upemp,index)=>{
+        if (updateInd === index) {
+          return emp
+        }
+        else{
+          return upemp
+        }
+      })
       
-      
-     
-      setEmployee([...employee,emp]);
+
+    setEmployee([...updateEmployee]);
       setFirstName("");
       setLastName("");
       setEmail("");
-      setFlag(false)
+      setFlag(false);
     } else {
       setError("Please Fill All Blanks");
     }

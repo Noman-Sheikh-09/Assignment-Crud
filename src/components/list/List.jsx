@@ -37,7 +37,7 @@ export default function List({ employee, index ,delHandler,updateHandler}) {
                 borderRadius: "2px",
                 padding: "5px 7px",
               }}
-              onClick={()=>updateHandler(employee)}
+              onClick={()=>updateHandler(employee,index)}
             >
               Update
             </button>
