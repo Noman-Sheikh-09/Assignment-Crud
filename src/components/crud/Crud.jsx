@@ -11,7 +11,7 @@ export default function Crud() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
-
+  
   const delHandler = (index) => {
     let newEmployee = employee.filter((employee, i) => {
       if (i !== index) {
@@ -21,8 +21,8 @@ export default function Crud() {
 
     setEmployee([...newEmployee]);
   };
-  const updateHandler = (employee) => {
-    console.log(employee); 
+  const updateHandler = (employee, index) => {
+    console.log(employee);
 
     setFirstName(employee.fname);
     setLastName(employee.lname);
@@ -39,6 +39,7 @@ export default function Crud() {
         email,
       };
       console.log(emp);
+
       setEmployee([...employee, emp]);
       setFirstName("");
       setLastName("");
@@ -48,30 +49,26 @@ export default function Crud() {
     }
   };
 
-const ctaUpdateHandler= ()=>{
-  setError("");
-  if (fname != "" && lname != "" && email != "") {
-    let emp = {
-      fname,
-      lname,
-      email,
-    };
-    
-
-
-
-    setEmployee([...employee, emp]);
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    flag(false)
-  } else {
-    setError("Please Fill All Blanks");
-  }
-
-
-}
-
+  const ctaUpdateHandler = () => {
+    setError("");
+    if (fname != "" && lname != "" && email != "") {
+      let emp = {
+        fname,
+        lname,
+        email,
+      };
+      
+      
+     
+      setEmployee([...employee,emp]);
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setFlag(false)
+    } else {
+      setError("Please Fill All Blanks");
+    }
+  };
 
   return (
     <div>
@@ -115,40 +112,39 @@ const ctaUpdateHandler= ()=>{
             </button> */}
         {/* <button>Submit</button> */}
       </div>
-      {
-      flag ?
-      <button
-        style={{
-          backgroundColor: "tomato",
-          color: "white",
-          padding: "5px 10px",
-          border: "1px solid tomato",
-          borderRadius: "3px",
-          textAlign: "center",
-          marginLeft: "600px",
-          marginTop: "10px",
-        }}
-        onClick={ctaHandler}
-      >
-        Update
-      </button>
-       : 
-       <button
-        style={{
-          backgroundColor: "tomato",
-          color: "white",
-          padding: "5px 10px",
-          border: "1px solid tomato",
-          borderRadius: "3px",
-          textAlign: "center",
-          marginLeft: "600px",
-          marginTop: "10px",
-        }}
-        onClick={ctaUpdateHandler}
-      >
-        Submit
-      </button>
-}
+      {flag ? (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "5px 10px",
+            border: "1px solid tomato",
+            borderRadius: "3px",
+            textAlign: "center",
+            marginLeft: "600px",
+            marginTop: "10px",
+          }}
+          onClick={ctaUpdateHandler}
+        >
+          Update
+        </button>
+      ) : (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "5px 10px",
+            border: "1px solid tomato",
+            borderRadius: "3px",
+            textAlign: "center",
+            marginLeft: "600px",
+            marginTop: "10px",
+          }}
+          onClick={ctaHandler}
+        >
+          Submit
+        </button>
+      )}
 
       {/* <button
         style={{
