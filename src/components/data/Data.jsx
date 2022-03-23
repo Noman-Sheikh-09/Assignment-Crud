@@ -9,10 +9,5 @@ export const Data =[
     lname:'Khan',
     email:'shahidkhan00@gmail.com'
 },
-// {
-//     fname:'Zubair',
-//     lname:'Kiyani  ',
-//     email:'zubairkiani21@gmail.com'
-// },
 
 ]

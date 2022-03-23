@@ -10,17 +10,25 @@ export default function Crud() {
   const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [flag, setFlag] = useState(false);
 
-const delHandler=(index)=>{
+  const delHandler = (index) => {
+    let newEmployee = employee.filter((employee, i) => {
+      if (i !== index) {
+        return employee;
+      }
+    });
 
-let newEmployee = employee.filter((index)=>{
-if(index !== index){
-  return employee
-}
-})
-setEmployee([...newEmployee,])
-}
+    setEmployee([...newEmployee]);
+  };
+  const updateHandler = (employee) => {
+    console.log(employee); 
 
+    setFirstName(employee.fname);
+    setLastName(employee.lname);
+    setEmail(employee.email);
+    setFlag(true);
+  };
 
   const ctaHandler = () => {
     setError("");
@@ -39,6 +47,32 @@ setEmployee([...newEmployee,])
       setError("Please Fill All Blanks");
     }
   };
+
+const ctaUpdateHandler= ()=>{
+  setError("");
+  if (fname != "" && lname != "" && email != "") {
+    let emp = {
+      fname,
+      lname,
+      email,
+    };
+    
+
+
+
+    setEmployee([...employee, emp]);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    flag(false)
+  } else {
+    setError("Please Fill All Blanks");
+  }
+
+
+}
+
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Employees List</h1>
@@ -81,6 +115,8 @@ setEmployee([...newEmployee,])
             </button> */}
         {/* <button>Submit</button> */}
       </div>
+      {
+      flag ?
       <button
         style={{
           backgroundColor: "tomato",
@@ -94,8 +130,41 @@ setEmployee([...newEmployee,])
         }}
         onClick={ctaHandler}
       >
+        Update
+      </button>
+       : 
+       <button
+        style={{
+          backgroundColor: "tomato",
+          color: "white",
+          padding: "5px 10px",
+          border: "1px solid tomato",
+          borderRadius: "3px",
+          textAlign: "center",
+          marginLeft: "600px",
+          marginTop: "10px",
+        }}
+        onClick={ctaUpdateHandler}
+      >
         Submit
       </button>
+}
+
+      {/* <button
+        style={{
+          backgroundColor: "tomato",
+          color: "white",
+          padding: "5px 10px",
+          border: "1px solid tomato",
+          borderRadius: "3px",
+          textAlign: "center",
+          marginLeft: "600px",
+          marginTop: "10px",
+        }}
+        onClick={ctaHandler}
+      >
+        Submit
+      </button> */}
       <p
         style={{
           backgroundColor: "white",
@@ -122,7 +191,14 @@ setEmployee([...newEmployee,])
         </tr>
       </table>
       {employee.map((item, index) => {
-        return <List employee={item}  delHandler={delHandler}/>;
+        return (
+          <List
+            employee={item}
+            index={index}
+            delHandler={delHandler}
+            updateHandler={updateHandler}
+          />
+        );
       })}
     </div>
   );

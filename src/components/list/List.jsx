@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function List({ employee, index ,delHandler,}) {
+export default function List({ employee, index ,delHandler,updateHandler}) {
   return (
     <div>
       <table
@@ -11,6 +11,7 @@ export default function List({ employee, index ,delHandler,}) {
         }}
       >
         <tr>
+          
           <td style={{ paddingRight: "200px" }}>{employee.fname}</td>
           <td style={{ paddingRight: "200px" }}>{employee.lname}</td>
           <td style={{ paddingRight: "100px" }}>{employee.email}</td>
@@ -36,6 +37,7 @@ export default function List({ employee, index ,delHandler,}) {
                 borderRadius: "2px",
                 padding: "5px 7px",
               }}
+              onClick={()=>updateHandler(employee)}
             >
               Update
             </button>
